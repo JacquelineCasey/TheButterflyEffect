@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://du34oopjf6hvm"]
+
+[ext_resource type="Texture2D" uid="uid://c23cupeh6fa4r" path="res://Icons/icon.svg" id="1_k2ao2"]
+[ext_resource type="Script" path="res://Scripts/Sample.cs" id="2_gq6dm"]
+
+[node name="EternalScene" type="Node2D"]
+editor_description = "The plan is that things that live truly forever can live in this scene somewhere.
+
+We'll have this scene load all other scenes on top I think.
+"
+metadata/_edit_vertical_guides_ = []
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(600, 300)
+texture = ExtResource("1_k2ao2")
+script = ExtResource("2_gq6dm")
+ticks = 10
