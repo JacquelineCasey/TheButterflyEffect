@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/Sample.cs" id="2_qb2oj"]
 [ext_resource type="Script" path="res://Scripts/InputManager.cs" id="3_hxqqu"]
 
-[node name="EternalScene" type="Node2D"]
+[node name="EternalScene" type="Node"]
 editor_description = "The plan is that things that live truly forever can live in this scene somewhere.
 
 We'll have this scene load all other scenes on top I think.
