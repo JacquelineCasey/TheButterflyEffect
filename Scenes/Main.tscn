@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ce7lboxrht3rg"]
+
+[ext_resource type="PackedScene" uid="uid://du34oopjf6hvm" path="res://Scenes/EternalScene.tscn" id="1_ia1ks"]
+
+[node name="Main" type="Node"]
+
+[node name="EternalScene" parent="." instance=ExtResource("1_ia1ks")]
