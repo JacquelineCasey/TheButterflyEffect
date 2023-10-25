@@ -1,7 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://c5p86wkov0f6r"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_qf523"]
-size = Vector2(200, 280)
+[gd_scene load_steps=2 format=3 uid="uid://c5p86wkov0f6r"]
 
 [sub_resource type="Curve2D" id="Curve2D_eetwy"]
 _data = {
@@ -10,15 +7,10 @@ _data = {
 point_count = 3
 
 [node name="Battle" type="Node2D"]
+editor_description = "This represents an instance of a battle, and manages the display of cards, players, enemies, little widgets to bring up the deck or retreat, etc."
 
-[node name="Placeholder Card" type="Sprite2D" parent="."]
-position = Vector2(1511, 1045)
-rotation = 0.257359
-texture = SubResource("PlaceholderTexture2D_qf523")
-
-[node name="Hand" type="Node" parent="."]
-
-[node name="HardCurve" type="Path2D" parent="Hand"]
+[node name="HardCurve" type="Path2D" parent="."]
+editor_description = "This is an invisible and static piece of geometry used by Battle to determine where to place and angle the cards in the player's hand."
 position = Vector2(28.6187, -125.517)
 scale = Vector2(0.929856, 1.12069)
 curve = SubResource("Curve2D_eetwy")

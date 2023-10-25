@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://do58ocdm5x080"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_gqg0g"]
+size = Vector2(200, 280)
+
+[node name="Card" type="Node2D"]
+
+[node name="PlaceholderCardSprite" type="Sprite2D" parent="."]
+texture = SubResource("PlaceholderTexture2D_gqg0g")
