@@ -29,9 +29,12 @@ public partial class Battle : Node2D {
 
 	private Curve2D hand_curve;
 
+	private Node2D draw_pile_node;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
 		hand_curve = GetNode<Path2D>("./HandCurve").Curve;
+		draw_pile_node = GetNode<Node2D>("./DrawPile");
 
 		/* TODO: Get cards from RunInfo.cs instead. */
 		draw_pile = new() {
@@ -73,7 +76,7 @@ public partial class Battle : Node2D {
 		draw_pile.RemoveAt(0);
 
 		PhysicalCard pulled_card_node = card_scene.Instantiate<PhysicalCard>();
-		pulled_card_node.Init(pulled_card);
+		pulled_card_node.Init(pulled_card, draw_pile_node.Position);
 		AddChild(pulled_card_node);
 
 		hand.Add(pulled_card);

@@ -31,8 +31,9 @@ public partial class PhysicalCard : Node2D {
 
 	/* Init is better than a constructor here, since a constructor would not create
 	 * the whole scene! */
-	public void Init(Card logical_card) {
+	public void Init(Card logical_card, Vector2 start_position) {
 		this.logical_card = logical_card;
+		this.Position = start_position;
 	}
 
 	public override void _Ready() {

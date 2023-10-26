@@ -17,3 +17,9 @@ editor_description = "This is an invisible and static piece of geometry used by 
 position = Vector2(23.6187, -125.517)
 scale = Vector2(0.929856, 1.12069)
 curve = SubResource("Curve2D_eetwy")
+
+[node name="DrawPile" type="Node2D" parent="."]
+editor_description = "Currently just a location that drawn cards appear from. In the future could also include a clickable icon
+
+"
+position = Vector2(80, 80)
