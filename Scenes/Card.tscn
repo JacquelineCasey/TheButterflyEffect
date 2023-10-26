@@ -7,6 +7,7 @@ size = Vector2(200, 280)
 
 [node name="Card" type="Node2D"]
 script = ExtResource("1_2rbev")
+track_speed = 10.0
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = SubResource("PlaceholderTexture2D_gqg0g")
