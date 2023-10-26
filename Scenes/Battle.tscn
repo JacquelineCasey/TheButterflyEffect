@@ -1,16 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://c5p86wkov0f6r"]
+[gd_scene load_steps=4 format=3 uid="uid://c5p86wkov0f6r"]
 
 [ext_resource type="Script" path="res://Scripts/Battle.cs" id="1_5s5bv"]
+[ext_resource type="PackedScene" uid="uid://do58ocdm5x080" path="res://Scenes/Card.tscn" id="2_lwa1s"]
 
 [sub_resource type="Curve2D" id="Curve2D_eetwy"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 300, 1050, -420, 0, 420, 0, 960, 990, 0, 0, 0, 0, 1620, 1050)
+"points": PackedVector2Array(0, 0, 0, 0, 300, 1080, -420, 0, 420, 0, 960, 1020, 0, 0, 0, 0, 1620, 1080)
 }
 point_count = 3
 
 [node name="Battle" type="Node2D"]
 editor_description = "This represents an instance of a battle, and manages the display of cards, players, enemies, little widgets to bring up the deck or retreat, etc."
 script = ExtResource("1_5s5bv")
+
+[node name="Card" parent="." instance=ExtResource("2_lwa1s")]
+position = Vector2(670, 1027)
+rotation = -0.093055
 
 [node name="HandCurve" type="Path2D" parent="."]
 editor_description = "This is an invisible and static piece of geometry used by Battle to determine where to place and angle the cards in the player's hand."

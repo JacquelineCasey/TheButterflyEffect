@@ -7,3 +7,17 @@ size = Vector2(200, 280)
 
 [node name="PlaceholderCardSprite" type="Sprite2D" parent="."]
 texture = SubResource("PlaceholderTexture2D_gqg0g")
+
+[node name="Description" type="RichTextLabel" parent="PlaceholderCardSprite"]
+offset_left = -90.0
+offset_right = 90.0
+offset_bottom = 130.0
+text = "Deal 4-6 damage to target argument."
+
+[node name="Name" type="RichTextLabel" parent="PlaceholderCardSprite"]
+offset_left = -90.0
+offset_top = -130.0
+offset_right = 90.0
+offset_bottom = -105.0
+bbcode_enabled = true
+text = "[center]Besmirch[/center]"
