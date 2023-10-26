@@ -23,17 +23,15 @@ public partial class PhysicalCard : Node2D {
 	/* The card moves to it's target point and rotation, which must be set from 
 	 * a controlloing class. */
 	private Vector2 target_point;
-	private float target_rotation;
+	private float target_rotation; // radians
 
 	[Export]
 	private float track_speed;  // What percent (0-100) towards destination are you moved each 1/60th of a second.
 
-	/* Used for test behavior */
-	private double time_since_target_move = 0;
-	private Window window;
 
-	public PhysicalCard(Card logical_card) {
-		GD.Print(logical_card.CardName());
+	/* Init is better than a constructor here, since a constructor would not create
+	 * the whole scene! */
+	public void Init(Card logical_card) {
 		this.logical_card = logical_card;
 	}
 
@@ -42,37 +40,25 @@ public partial class PhysicalCard : Node2D {
 		description_label = GetNode<RichTextLabel>("./Sprite/Description");
 		/* base_card assumed to be set */
 
-		window = GetTree().Root;
+		// window = GetTree().Root;
 
 		name_label.Text = $"[center]{logical_card.CardName()}[/center]";
 		description_label.Text = $"[center]{logical_card.Description()}[/center]";
 	}
 
+	public void SetTargetPoint(Vector2 point) {
+		target_point = point;
+	}
+
+	public void SetTargetRotation(float radians) {
+		target_rotation = radians;
+	}
+
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta) {
-		/* Temporary behavior */
-		time_since_target_move += delta;
-
-		if (time_since_target_move >= 5.0) {
-			/* Next step: Move positioning logic to Battle.cs, have it spawn and
-			 * move cards onto the HandCurve */
-
-			time_since_target_move -= 5.0;
-
-			target_point = new(
-				GD.Randf() * window.ContentScaleSize.X,
-				GD.Randf() * window.ContentScaleSize.Y
-			);
-
-			target_rotation = (float) GD.RandRange(-45.0, 45.0);
-
-			GD.Print(target_point);
-			GD.Print(target_rotation);
-		}
-
 		float distance_scale = (float) Mathf.Pow(1 - track_speed / 100, delta * 60);
 		Position = distance_scale * (Position - target_point) + target_point;
 
-		RotationDegrees = distance_scale * (RotationDegrees - target_rotation) + target_rotation;
+		Rotation = distance_scale * (Rotation - target_rotation) + target_rotation;
 	}
 }
