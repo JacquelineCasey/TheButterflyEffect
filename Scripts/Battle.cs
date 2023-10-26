@@ -113,11 +113,28 @@ public partial class Battle : Node2D {
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta) {
+		/* DEMO */
+		
 		timer -= delta;
 		if (timer < 0) {
 			timer += 0.125;
 
 			DrawCard();
 		}
+
+		/* END DEMO */ 
+
+		// Might have some silly code here to do intersections with all the things
+		// on the screen that the mouse could hover over. But I might want a more
+		// general system for that. Cards can be given a collision body that is
+		// willing to detect inputs from the mouse, but issues might arise in the
+		// case where one ends up hovering over both.
+		//
+		// Actually my tests in slay the spire indicate that maybe its not a big
+		// deal to pick the card below the other one, if they don't overlap that
+		// much and we definitily pick one while making the others reachable.
+		//
+		// Unrelated, but maybe hand location stuff could be sent to a dedicated
+		// script on the Path2D?
 	}
 }

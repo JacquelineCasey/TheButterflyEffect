@@ -11,6 +11,7 @@
 
 using Godot;
 using System;
+using System.Diagnostics;
 
 public partial class PhysicalCard : Node2D {
 	private RichTextLabel name_label; 
@@ -39,9 +40,9 @@ public partial class PhysicalCard : Node2D {
 	public override void _Ready() {
 		name_label = GetNode<RichTextLabel>("./Sprite/Name");
 		description_label = GetNode<RichTextLabel>("./Sprite/Description");
-		/* base_card assumed to be set */
-
-		// window = GetTree().Root;
+		
+		/* logical_card assumed to be set */
+		Debug.Assert(logical_card != null);
 
 		name_label.Text = $"[center]{logical_card.CardName()}[/center]";
 		description_label.Text = $"[center]{logical_card.Description()}[/center]";
