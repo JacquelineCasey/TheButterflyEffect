@@ -3,7 +3,4 @@
     <TargetFramework>net6.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
   </PropertyGroup>
-  <PropertyGroup> <!-- This enables C#'s null checking feature. There's a chance Godot will hate this... -->
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
 </Project>

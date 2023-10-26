@@ -11,8 +11,7 @@
  * References:
  * - https://docs.godotengine.org/en/stable/classes/class_inputmap.html#class-inputmap
  * - https://docs.godotengine.org/en/stable/tutorials/inputs/inputevent.html#doc-inputevent
- * - https://docs.godotengine.org/en/stable/tutorials/inputs/input_examples.html
- */
+ * - https://docs.godotengine.org/en/stable/tutorials/inputs/input_examples.html */
 
 using Godot;
 using System;

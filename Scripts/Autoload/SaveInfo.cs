@@ -8,12 +8,11 @@
  * should impact the save (not just the current run), then it should talk to this
  * object. This object could also manage actually performing saving and loading.
  * However, that will require info about the run, so maybe that behavior doesn't
- * belong here?
- */
+ * belong here? */
 
 using Godot;
 using System;
-using System.Numerics;
+
 
 public partial class SaveInfo : Node {
 	// Called when the node enters the scene tree for the first time.
