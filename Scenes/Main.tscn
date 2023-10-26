@@ -1,7 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://ce7lboxrht3rg"]
+[gd_scene load_steps=3 format=3 uid="uid://ce7lboxrht3rg"]
 
-[ext_resource type="PackedScene" uid="uid://du34oopjf6hvm" path="res://Scenes/EternalScene.tscn" id="1_ia1ks"]
+[ext_resource type="Texture2D" uid="uid://c23cupeh6fa4r" path="res://Icons/icon.svg" id="1_tdgx4"]
+[ext_resource type="Script" path="res://Scripts/Sample.cs" id="2_ge70i"]
 
 [node name="Main" type="Node"]
 
-[node name="EternalScene" parent="." instance=ExtResource("1_ia1ks")]
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("1_tdgx4")
+script = ExtResource("2_ge70i")
+ticks = 10
