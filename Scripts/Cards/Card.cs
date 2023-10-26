@@ -49,6 +49,9 @@ public partial class Card : Node2D {
 		time_since_target_move += delta;
 
 		if (time_since_target_move >= 5.0) {
+			/* Next step: Move positioning logic to Battle.cs, have it spawn and
+			 * move cards onto the HandCurve */
+
 			time_since_target_move -= 5.0;
 
 			target_point = new(
