@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://e0u1x8abusp0"]
+
+[ext_resource type="Script" path="res://Scripts/Cards/BaseCard.cs" id="1_hqsa1"]
+
+[resource]
+script = ExtResource("1_hqsa1")
+Description = "Target becomes Bamboozled for 3 turns."
+CardName = "Gaslight"
+Damage = 2

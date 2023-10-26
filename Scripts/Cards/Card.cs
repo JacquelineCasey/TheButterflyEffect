@@ -1,73 +1,39 @@
-/* Card.cs - A Node representing a card.
+/* PhysicalCard.cs - A Class representing a card.
  * Author(s): Jacqueline
  * 
- * See also the resource, BaseCard, which defines the base state of each card.
- * This class represents a single instance of a card (with any modifications / other
- * info), whereas BaseCard is the platonic form of the card.
+ * Not to be confused with the Node PhysicalCard, which is a card being displayed
+ * to the user. Also not the be confused with BaseCard, which is a resource that
+ * represents a card that can be obtained in the game. 
  *
- * I'm not set on this architecture tbh. I might seperate further the logical card
- * (perhaps a Reference) from the card node that exists on the screen to be dragged
- * around (more of a UI thing really). */
+ * Card will point to a base card, which is the kind of card that this is an instance
+ * of. A Physical card will reference a Card, so that the physical card only cares
+ * about the card on the screen, and this class can care only about the logic and
+ * state of the current card. BaseCard should never change during the running of
+ * the game. Card can change, if the card is upgraded or otherwise changed somehow.
+ * PhysicalCard looks at Card to see these changes, and changes itself to handle
+ * user input. If Card needs to notify any of its Physical Card instances (ideally
+ * there is only one...), it should use Signals.
+ *
+ * RefCounted means that we do not need to worry about freeing this manually. RefCounted 
+ * is a good candidate for classes that are important to game logic, but are not
+ * actually nodes in the scene tree. */
 
 using Godot;
 using System;
 
-public partial class Card : Node2D {
-	private RichTextLabel name_label; 
-	private RichTextLabel description_label; 
 
-	[Export]
+public partial class Card : RefCounted {
 	private BaseCard base_card;
 
-	/* The card moves to it's target point, which must be set from a controlloing 
-	 * class. */
-	private Vector2 target_point;
+    public Card(BaseCard base_card) {
+        this.base_card = base_card;
+    }
 
-	private float target_rotation;
+    public string CardName() { 
+        return base_card.CardName;
+    }
 
-	[Export]
-	private float track_speed;  // What percent (0-100) towards destination are you moved each 1/60th of a second.
-
-	/* Used for test behavior */
-	private double time_since_target_move = 0;
-	private Window window;
-
-	public override void _Ready() {
-		name_label = GetNode<RichTextLabel>("./Sprite/Name");
-		description_label = GetNode<RichTextLabel>("./Sprite/Description");
-		/* base_card assumed to be set */
-
-		window = GetTree().Root;
-
-		name_label.Text = $"[center]{base_card.CardName}[/center]";
-		description_label.Text = $"[center]{base_card.Description}[/center]";
-	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta) {
-		/* Temporary behavior */
-		time_since_target_move += delta;
-
-		if (time_since_target_move >= 5.0) {
-			/* Next step: Move positioning logic to Battle.cs, have it spawn and
-			 * move cards onto the HandCurve */
-
-			time_since_target_move -= 5.0;
-
-			target_point = new(
-				GD.Randf() * window.ContentScaleSize.X,
-				GD.Randf() * window.ContentScaleSize.Y
-			);
-
-			target_rotation = (float) GD.RandRange(-45.0, 45.0);
-
-			GD.Print(target_point);
-			GD.Print(target_rotation);
-		}
-
-		float distance_scale = (float) Mathf.Pow(1 - track_speed / 100, delta * 60);
-		Position = distance_scale * (Position - target_point) + target_point;
-
-		RotationDegrees = distance_scale * (RotationDegrees - target_rotation) + target_rotation;
-	}
+    public string Description() {
+        return base_card.Description;
+    }
 }

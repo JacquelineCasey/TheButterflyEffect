@@ -1,8 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://c5p86wkov0f6r"]
+[gd_scene load_steps=3 format=3 uid="uid://c5p86wkov0f6r"]
 
 [ext_resource type="Script" path="res://Scripts/Battle.cs" id="1_5s5bv"]
-[ext_resource type="PackedScene" uid="uid://do58ocdm5x080" path="res://Scenes/Card.tscn" id="2_lwa1s"]
-[ext_resource type="Resource" uid="uid://c1t7ymsijnvj0" path="res://Scripts/Cards/Besmirch.tres" id="3_3fqvo"]
 
 [sub_resource type="Curve2D" id="Curve2D_eetwy"]
 _data = {
@@ -13,11 +11,6 @@ point_count = 3
 [node name="Battle" type="Node2D"]
 editor_description = "This represents an instance of a battle, and manages the display of cards, players, enemies, little widgets to bring up the deck or retreat, etc."
 script = ExtResource("1_5s5bv")
-
-[node name="Card" parent="." instance=ExtResource("2_lwa1s")]
-position = Vector2(659, 1026)
-rotation = -0.093055
-base_card = ExtResource("3_3fqvo")
 
 [node name="HandCurve" type="Path2D" parent="."]
 editor_description = "This is an invisible and static piece of geometry used by Battle to determine where to place and angle the cards in the player's hand."
