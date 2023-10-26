@@ -17,8 +17,9 @@ config/icon="res://Icons/icon.svg"
 
 [autoload]
 
-RunInfo="*res://Scripts/RunInfo.cs"
-InputManager="*res://Scripts/InputManager.cs"
+InputManager="*res://Scripts/Autoload/InputManager.cs"
+RunInfo="*res://Scripts/Autoload/RunInfo.cs"
+SaveInfo="*res://Scripts/Autoload/SaveInfo.cs"
 
 [display]
 
