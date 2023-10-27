@@ -32,7 +32,7 @@ public partial class PhysicalCard : Area2D {
 
 	[Export]
 	private float track_speed;  // What percent (0-100) towards destination are you moved each 1/60th of a second.
-
+	public Boolean Tracking { get; set; } = true;
 
 	/* Init is better than a constructor here, since a constructor would not create
 	 * the whole scene! */
@@ -63,13 +63,14 @@ public partial class PhysicalCard : Area2D {
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta) {
-		if (!focused) {
+		if (Tracking) {
 			float distance_scale = (float) Mathf.Pow(1 - track_speed / 100, delta * 60);
 			Position = distance_scale * (Position - target_point) + target_point;
 
 			Rotation = distance_scale * (Rotation - target_rotation) + target_rotation;
 		}
-		else {
+
+		if (focused) {
 			if (no_check_unfocus_frames == 0) {
 				if (!MouseHovering()) {
 					EmitSignal(SignalName.FocusEnd, logical_card);
@@ -102,6 +103,9 @@ public partial class PhysicalCard : Area2D {
 		Rotation = 0;
 		Position = new(Position.X, 1080 - 140 * 1.3f);
 		ZIndex = 20;
+
+		target_point = Position;
+		target_rotation = Rotation;
 	}
 
 	/* Performs a collision check to determine if the mouse is hovering.

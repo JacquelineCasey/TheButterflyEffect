@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://c5p86wkov0f6r"]
+[gd_scene load_steps=4 format=3 uid="uid://c5p86wkov0f6r"]
 
 [ext_resource type="Script" path="res://Scripts/Battle.cs" id="1_5s5bv"]
 
@@ -7,6 +7,9 @@ _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 340, 1080, -300, 0, 300, 0, 960, 1020, 0, 0, 0, 0, 1580, 1080)
 }
 point_count = 3
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k53rc"]
+size = Vector2(1920, 800)
 
 [node name="Battle" type="Node2D"]
 editor_description = "This represents an instance of a battle, and manages the display of cards, players, enemies, little widgets to bring up the deck or retreat, etc."
@@ -21,3 +24,13 @@ editor_description = "Currently just a location that drawn cards appear from. In
 
 "
 position = Vector2(80, 80)
+
+[node name="CardPlayZone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CardPlayZone"]
+position = Vector2(960, 400)
+shape = SubResource("RectangleShape2D_k53rc")
+debug_color = Color(0, 0.6, 0.701961, 0.0784314)
+
+[connection signal="mouse_entered" from="CardPlayZone" to="." method="OnMouseEnterCardPlayZone"]
+[connection signal="mouse_exited" from="CardPlayZone" to="." method="OnMouseExitCardPlayZone"]

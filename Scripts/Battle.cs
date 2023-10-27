@@ -19,11 +19,12 @@ public partial class Battle : Node2D {
 	 * I call these "stretchy arrays," because they stretch out (roughly double
 	 * in size) when run out of space. */
 	private List<Card> draw_pile;
+	private readonly List<Card> discard_pile = new();
 
-	private List<Card> hand = new();
+	private readonly List<Card> hand = new();
 
 	/* This is a hashtable behind the scences */
-	private Dictionary<Card, PhysicalCard> hand_card_nodes = new();
+	private readonly Dictionary<Card, PhysicalCard> hand_card_nodes = new();
 
 	private PackedScene card_scene = GD.Load<PackedScene>("res://Scenes/PhysicalCard.tscn");
 
@@ -31,8 +32,12 @@ public partial class Battle : Node2D {
 
 	private Node2D draw_pile_node;
 
-	private HashSet<Card> cards_attempting_focus = new();
+	private readonly HashSet<Card> cards_attempting_focus = new();
 	private Card focused_card; // Often null
+
+	private bool mouse_in_card_play_zone = false;
+
+	private Card dragged_card = null;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
@@ -57,10 +62,6 @@ public partial class Battle : Node2D {
 		// 2^32 possible shuffles due to GD seed. Good enough for small lists, and
 		// a non crypotgraphic applications.
 		draw_pile = draw_pile.OrderBy((_) => GD.Randi()).ToList();
-
-		foreach (Card card in draw_pile) {
-			GD.Print(card.CardName());
-		}
 
 		/* Draw 5 cards? */
 	}
@@ -172,4 +173,65 @@ public partial class Battle : Node2D {
 		// Unrelated, but maybe hand location stuff could be sent to a dedicated
 		// script on the Path2D?
 	}
+
+	/* Play the dragged card, if allowed. */
+	public void TryPlayCard() {
+		/* Assumes Card is allowed to be played. */
+
+		var card_node = hand_card_nodes[dragged_card];
+		hand.Remove(dragged_card);
+		hand_card_nodes.Remove(dragged_card);
+		discard_pile.Add(dragged_card);
+
+		cards_attempting_focus.Clear();
+		focused_card = null;
+		dragged_card = null;
+
+		AdjustHandCardLocations();
+
+		/* TODO: Play nice animation, visibly send to discard. */
+
+		/* TODO: Play effect of card. */
+
+		card_node.Free(); // Likely to move to the card itself so it can do so after animation.
+	}
+
+	/* Connected to Signal */
+	public void OnMouseEnterCardPlayZone() {
+		mouse_in_card_play_zone = true;
+	}
+
+	/* Connected to Signal */
+	public void OnMouseExitCardPlayZone() {
+		mouse_in_card_play_zone = false;
+	}
+
+    public override void _Input(InputEvent @event) {
+		if (@event is InputEventMouseButton mouse_click_event) {
+			if (mouse_click_event.Pressed) {
+				if (focused_card is not null) {
+					dragged_card = focused_card;
+					hand_card_nodes[dragged_card].Tracking = false;
+				}
+			}
+			if (!mouse_click_event.Pressed) {
+				if (dragged_card is not null && mouse_in_card_play_zone) {
+					TryPlayCard();
+				}
+				else {
+					hand_card_nodes[dragged_card].Tracking = true;
+					dragged_card = null;
+				}	
+			}
+		}
+		else if (@event is InputEventMouseMotion mouse_move_event) {
+			if (dragged_card is not null) {
+				hand_card_nodes[dragged_card].Position += mouse_move_event.Relative;
+
+				if (mouse_in_card_play_zone) {
+					/* Todo: Fanfare, highlighting, shaking, etc. */
+				}
+			}
+		}
+    }
 }
