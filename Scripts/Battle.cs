@@ -181,6 +181,7 @@ public partial class Battle : Node2D {
 		var card_node = hand_card_nodes[dragged_card];
 		hand.Remove(dragged_card);
 		hand_card_nodes.Remove(dragged_card);
+		card_node.QueueFree(); // Free node and children when safe to do so.
 		discard_pile.Add(dragged_card);
 
 		cards_attempting_focus.Clear();
