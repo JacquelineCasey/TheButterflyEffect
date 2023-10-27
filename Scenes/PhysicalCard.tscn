@@ -1,11 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://do58ocdm5x080"]
+[gd_scene load_steps=4 format=3 uid="uid://do58ocdm5x080"]
 
 [ext_resource type="Script" path="res://Scripts/Cards/PhysicalCard.cs" id="1_2rbev"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_gqg0g"]
 size = Vector2(200, 280)
 
-[node name="Card" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_772ln"]
+size = Vector2(200, 280)
+
+[node name="Card" type="Area2D"]
 script = ExtResource("1_2rbev")
 track_speed = 10.0
 
@@ -26,3 +29,8 @@ offset_right = 90.0
 offset_bottom = -105.0
 bbcode_enabled = true
 text = "<My name>"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_772ln")
+
+[connection signal="mouse_entered" from="." to="." method="OnMouseEntered"]

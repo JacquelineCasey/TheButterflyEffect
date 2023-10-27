@@ -4,7 +4,7 @@
 
 [sub_resource type="Curve2D" id="Curve2D_eetwy"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 530, 1080, -300, 0, 300, 0, 960, 1020, 0, 0, 0, 0, 1390, 1080)
+"points": PackedVector2Array(0, 0, 0, 0, 340, 1080, -300, 0, 300, 0, 960, 1020, 0, 0, 0, 0, 1580, 1080)
 }
 point_count = 3
 
@@ -14,8 +14,6 @@ script = ExtResource("1_5s5bv")
 
 [node name="HandCurve" type="Path2D" parent="."]
 editor_description = "This is an invisible and static piece of geometry used by Battle to determine where to place and angle the cards in the player's hand."
-position = Vector2(23.6187, -125.517)
-scale = Vector2(0.929856, 1.12069)
 curve = SubResource("Curve2D_eetwy")
 
 [node name="DrawPile" type="Node2D" parent="."]

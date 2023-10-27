@@ -31,6 +31,9 @@ public partial class Battle : Node2D {
 
 	private Node2D draw_pile_node;
 
+	private HashSet<Card> cards_attempting_focus = new();
+	private Card focused_card; // Often null
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
 		hand_curve = GetNode<Path2D>("./HandCurve").Curve;
@@ -82,7 +85,39 @@ public partial class Battle : Node2D {
 		hand.Add(pulled_card);
 		hand_card_nodes[pulled_card] = pulled_card_node;
 
+		pulled_card_node.TryFocusStart += OnCardFocus;
+		pulled_card_node.FocusEnd += OnCardUnfocus;
+
 		AdjustHandCardLocations();
+	}
+
+	public void OnCardFocus(Card card) {
+		if (cards_attempting_focus.Count == 0) {
+			focused_card = card;
+			hand_card_nodes[card].Focus();
+		}
+
+		cards_attempting_focus.Add(card);
+	}
+
+	public void OnCardUnfocus(Card card) {
+		if (card == focused_card) {
+			focused_card = null;
+		}
+
+		cards_attempting_focus.Remove(card);
+		AdjustHandCardLocations();
+
+		while (cards_attempting_focus.Count != 0) {
+			var next = cards_attempting_focus.First();
+			if (hand_card_nodes[next].MouseHovering()) {
+				focused_card = next;
+				hand_card_nodes[next].Focus();
+				return;
+			}
+
+			cards_attempting_focus.Remove(next);
+		}
 	}
 
 	/* Tells cards in the hand where to go. */
