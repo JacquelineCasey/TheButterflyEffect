@@ -216,13 +216,15 @@ public partial class Battle : Node2D {
 				}
 			}
 			if (!mouse_click_event.Pressed) {
-				if (dragged_card is not null && mouse_in_card_play_zone) {
-					TryPlayCard();
+				if (dragged_card is not null) {
+					if (mouse_in_card_play_zone) {
+						TryPlayCard();
+					}
+					else {
+						hand_card_nodes[dragged_card].Tracking = true;
+						dragged_card = null;
+					}	
 				}
-				else {
-					hand_card_nodes[dragged_card].Tracking = true;
-					dragged_card = null;
-				}	
 			}
 		}
 		else if (@event is InputEventMouseMotion mouse_move_event) {
