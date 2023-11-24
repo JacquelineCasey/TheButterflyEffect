@@ -1,0 +1,24 @@
+# A sample file showing the (planned) features of the Butterfly Dialogue Language.
+# (ButtDiaL for short)
+
+# Hashtags mark comments. A hashtag anywhere on the line starts a comment, and the hashtag and
+# rest of the line will be removed.
+
+# Blank spaces between lines will be disregarded
+
+# Blurbs are marked with square brackets like so. This lists the speaking character
+# and their expression.
+[FriendlyRobot | Smiling] Good Morning {PlayerName}.  # <- {} will be replaced by the value of the variable at dialogue run time.
+[] It is 6:00 AM.  # <- [] starts a new blurb with the previous settings 
+You're up pretty early.  # <- A blurb can go onto the next line, its fine.
+
+[Player | Relaxed] Good morning robot.
+[_] Here we go again...  # <- [_] clears the name and the portrait. This text is not being spoken, only thought.
+
+!EVENT RunStart  # <- A line starting with ! is interpretted as a command.
+
+# We'll add several commands as needed. This one emits an event to be handled by
+# some other code in the system (this particular event will initialize the Run).
+
+# I can imagine Commands doing things like navigating to different parts of conversations,
+# Checking flags to trigger conditional dialogue, etc.

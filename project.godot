@@ -20,6 +20,7 @@ config/icon="res://Icons/icon.svg"
 InputManager="*res://Scripts/Autoload/InputManager.cs"
 RunInfo="*res://Scripts/Autoload/RunInfo.cs"
 SaveInfo="*res://Scripts/Autoload/SaveInfo.cs"
+DialogueManager="*res://Scripts/Autoload/DialogueManager.cs"
 
 [display]
 
